@@ -95,7 +95,7 @@ def main(): # Da la bienvenida y las instrucciones de juego
             # Para terminar el juego
             if juego_terminado(tablero_barcos_ordenador):
                 print("\n" + ":" * 60)
-                print("¡BRAVO PACIFISTA! HAS DEJADO AL ORDENADOR SIN FLOTA!")
+                print("¡BRAVO TORPEDO! HAS DEJADO AL ORDENADOR SIN FLOTA!")
                 print(f"Has disparado {disparos_jugador} torpedos.")
                 print(f"El ordenador ha disparado {disparos_ordenador} torpedos.")
                 print(":" * 60)
