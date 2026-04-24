@@ -13,14 +13,19 @@ def imprimir_tablero(tablero, ocultar_barcos=True):
     print("   " + " ".join(str(i) for i in range(10)))  # Numeros de columnas
     for i in range(10):
         if ocultar_barcos:# xa el tablero de disparos
-            fila_mostrar = ['~' if tablero[i][j] == 'B' else tablero[i][j] for j in range(10)]
+            fila_mostrar = []
+            for j in range(10):
+                if tablero[i][j] == 'B':
+                    fila_mostrar.append('~')  # Oculta posición barco, muestra '~'
+                else:
+                    fila_mostrar.append(tablero[i][j])  # Muestra 'X'/'o' al disparar
+            print(f"{i:2} | " + " ".join(fila_mostrar))
         else:
-            fila_mostrar = [tablero[i][j] for j in range(10)]
-        print(f"{i}  " + " ".join(fila_mostrar))  # Numero de fila y contenido
+            print(f"{i:2} | " + " ".join(tablero[i]))  # Esto debería mostrar todo
 
 '''
    PASO 2
-   Imprime un tablero con los elementos básicos agua '~' y barcos 'B'.
+   Imprime un tablero con los elementos básicos agua, barcos y disparos (dos tipos).
    Ocultar barcos es booleano: False es la posición real, True el jugador ve agua.
 '''
 
@@ -44,7 +49,6 @@ def colocar_barco(tablero, tamano):
 '''
     PASO 3
     Coloca un barco de forma aleatoria.
-    No superpone.
     Define tamaño y tablero.
 '''
 
@@ -57,6 +61,7 @@ def colocar_barcos_jugador():
 '''
     PASO 4
     Coloca los 6 barcos en tablero del jugador aleatoriamente.
+    Permite posiciones contiguas.
     Define el tamaño de los barcos: 1 de 4 casillas, 2 de 3 casillas, 3 de 2 casillas.
 '''
 
@@ -73,11 +78,10 @@ def colocar_barcos_ordenador():
 '''
 
 def disparar(tablero_barcos, tablero_disparos, fila, col):
-    if tablero_disparos[fila][col] != '~': # xa no disparar dos veces en el mismo sitio
+    if tablero_disparos[fila][col] in ['X', 'o']: # marca los impactos y las aguas
         return "ya disparado"
     if tablero_barcos[fila][col] == 'B': # # si hay barco en el tablero oculto
         tablero_disparos[fila][col] = 'X'  # tocado, marca X en tablero disparos
-        tablero_barcos[fila][col] = 'H'    # xa que el jugador no se confunda 
         return "tocado"
     else:
         tablero_disparos[fila][col] = 'o'  # xa diferenciar agua donde ya se ha disparado
@@ -86,7 +90,7 @@ def disparar(tablero_barcos, tablero_disparos, fila, col):
 '''
     PASO 6
     Turno de disparo del jugador.
-    Coordenadas del disparo [fila] [columna], las introduce el jugador.
+    Dispara en las coordenadas introducidas [fila] [columna].
     No permite disparar dos veces en el mismo sitio.
     Refleja el resultado del disparo en tablero del jugador:
     'X' indica barco tocado, 'H' barco hundido, 'o' agua (cambia por '~').

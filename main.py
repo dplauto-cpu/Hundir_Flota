@@ -36,6 +36,7 @@ def main(): # Da la bienvenida y las instrucciones de juego
     tablero_disparos_ordenador = crear_tablero()  
     
     print("Barcos colocados aleatoriamente para ambos jugadores")
+    print("Leyenda: X = Tocado | o = Disparo al agua | B = Barco | ~ = Agua de mar") 
 
     # Estadistica, muy simple, cada disparo, van de 1 en 1
     disparos_jugador = 0
@@ -50,17 +51,21 @@ def main(): # Da la bienvenida y las instrucciones de juego
     while True:
         if turno_jugador:             # Turno del jugador
             print("\n" + ":" * 60)
-            print("TU TURNO - TABLERO DE DISPAROS (al ordenador):")
+            print("TABLERO DE DISPAROS (a la flota enemiga):")
+            print("Leyenda: X = Tocado | o = Fallo enemigo | B = Barco activo | ~ = Agua")
             print(":" * 60)
-            imprimir_tablero(tablero_disparos_jugador, ocultar_barcos=True)
+            imprimir_tablero(tablero_disparos_jugador, ocultar_barcos=False) #xa ver \
+            # disparos realizados
             
-            print("\n" + "-" * 60) # Xa ver barcos ordenador, no muy emocionante pero...
-            print("TABLERO DE BARCOS DEL ORDENADOR (posiciones reales):")  
-            print("-" * 60)
-            imprimir_tablero(tablero_barcos_ordenador, ocultar_barcos=False) 
+            #print("\n" + "-" * 60) # Xa ver barcos ordenador, no muy emocionante pero...
+            #print("TABLERO DEL ORDENADOR:")  
+            #print("Leyenda: X = Tocado | o = Fallo enemigo | B = Barco activo | ~ = Agua")
+            #print("-" * 60)
+            #imprimir_tablero(tablero_barcos_ordenador, ocultar_barcos=False) 
 
             print("\n" + "-" * 60)
             print("TUS BARCOS (disparos del ordenador a tu flota):")
+            print("Leyenda: X = Tocado | o = Fallo enemigo | B = Barco activo | ~ = Agua")
             print("-" * 60)
             imprimir_tablero(tablero_barcos_jugador, ocultar_barcos=False)
             
@@ -109,7 +114,7 @@ def main(): # Da la bienvenida y las instrucciones de juego
             
             # Cambio de turno
             turno_jugador = False
-            input("\nFin de tu turno. Pulsa ENTER para el turno del ordenador...")
+            input("\nPulsa ENTER para el turno del ordenador...")
             
         else:
             # TURNO DEL ORDENADOR
@@ -129,7 +134,7 @@ def main(): # Da la bienvenida y las instrucciones de juego
             
             print(f"\nEnemigo dispara en ({fila}, {col})...")
             if resultado == "tocado":
-                print("!Tocado, ay, ay, ay¡")
+                print("¡Tocado, ay, ay, ay!")
             else:
                 print("Buff, que alivio, ha malgastado un torpedo")
             
@@ -148,7 +153,7 @@ def main(): # Da la bienvenida y las instrucciones de juego
             
             # Cambio turno
             turno_jugador = True
-            input("\nFin del turno del ordenador. Pulsaa ENTER para tu turno...")
+            input("\nPulsa ENTER para tu turno...")
 
 if __name__ == "__main__":
     main()
